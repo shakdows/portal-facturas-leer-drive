@@ -82,4 +82,9 @@ export default async function handler(req, res) {
 
     const carpeta = match[0];
     const archivos = await listarRecursivo(token, carpeta.id);
-    return res.status(200)
+    return res.status(200).json({ ok: true, carpeta: carpeta.name, archivos });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: "Error interno", detalle: e.message });
+  }
+}
